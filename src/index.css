@@ -1,10 +1,12 @@
 :root {
-  --clr-primary: rgb(138, 247, 202);
-  --clr-icons: rgb(81, 187, 143);
+  --clr-body: rgb(74, 43, 148);
+  --clr-primary: rgb(214, 128, 16);
+  --clr-icons: rgb(182, 157, 77);
+  --clr-header: #9c3d3d;
   --clr-light: #ffffff;
-  --clr-dark: #333;
+  --clr-dark: rgb(59, 56, 56);
   --clr-warning: rgb(184, 12, 12);
-  --clr-fond: rgb(204, 204, 204);
+  --clr-fond: rgb(91, 82, 117);
 }
 
 * {
@@ -18,6 +20,7 @@ html {
 }
 
 body {
+  background-color: var(--clr-body);
   min-height: 100vh;
   font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
@@ -164,7 +167,7 @@ button {
 button:focus,
 button:hover {
   color: var(--clr-light);
-  background-color: rgb(52, 102, 160);
+  background-color: var(--clr-dark);
   outline: none;
 }
 
@@ -190,4 +193,12 @@ button:hover {
   padding: 0.25rem;
   border-radius: 0.25rem;
   outline: none;
+}
+
+input {
+  accent-color: var(--clr-body);
+  color: var(--clr-light);
+  background-color: var(--clr-body);
+  padding: 10px 15px;
+  border-radius: 3px;
 }
