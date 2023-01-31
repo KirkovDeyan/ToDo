@@ -93,6 +93,8 @@ ul li::before {
 }
 
 .item input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
   text-align: center;
   width: 2.5rem;
   width: 48px;
