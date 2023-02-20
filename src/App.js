@@ -4,29 +4,43 @@ import Content from './Content';
 import Footer from './Footer';
 import AddItem from './AddItem';
 import { useState } from 'react';
+import { v4 as uuidv4 } from "uuid";
+
 
 function App() {
-  const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppinglist')));
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem("shoppinglist")) ?? []
+  );
 
-  const [newItem, setNewItem] = useState('');
-  const [search, setSearch] = useState('');
-
+  const [newItem, setNewItem] = useState("");
+  const [search, setSearch] = useState("");
 
   const setAndSave = (newItems) => {
     setItems(newItems);
-    localStorage.setItem('shoppinglist', JSON.stringify(newItems));
+    localStorage.setItem("shoppinglist", JSON.stringify(newItems));
   };
 
   const addItem = (item) => {
-    const id = items.length ? items[items.length - 1].id + 1 : 1;
-    const myNewItem = { id, checked: false, item };
-    const listItems = [...items, myNewItem];
+    const myNewItem = { id: uuidv4(), checked: false, item };
+    const listItems = [myNewItem, ...items];
     setAndSave(listItems);
   };
 
   const handleCheck = (id) => {
-    const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
-    setAndSave(listItems);
+    if (items.find((item) => item.id === id)?.checked) {
+      const listItems = [...items];
+      let item = listItems.findIndex((item) => item.id === id);
+      item = listItems.splice(item, 1)[0];
+      item.checked = false;
+      listItems.unshift(item);
+      setAndSave(listItems);
+    } else {
+      const listItems = items.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      );
+      const sorted = listItems.sort((a, b) => a.checked - b.checked);
+      setAndSave(sorted);
+    }
   };
 
   const handleDelete = (id) => {
@@ -38,7 +52,7 @@ function App() {
     e.preventDefault();
     if (!newItem) return;
     addItem(newItem);
-    setNewItem('');
+    setNewItem("");
   };
 
   return (
@@ -47,12 +61,13 @@ function App() {
       <AddItem
         newItem={newItem}
         setNewItem={setNewItem}
-        handleSubmit={handleSubmit} />
-      <SearchItem
-        search={search}
-        setSearch={setSearch} />
+        handleSubmit={handleSubmit}
+      />
+      <SearchItem search={search} setSearch={setSearch} />
       <Content
-        items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
+        items={items.filter((item) =>
+          item.item.toLowerCase().includes(search.toLowerCase())
+        )}
         handleCheck={handleCheck}
         handleDelete={handleDelete}
       />

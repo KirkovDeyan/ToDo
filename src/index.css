@@ -6,7 +6,7 @@
   --clr-light: #ffffff;
   --clr-dark: rgb(59, 56, 56);
   --clr-warning: rgb(184, 12, 12);
-  --clr-fond: rgb(91, 82, 117);
+  --clr-fond: rgb(125, 117, 148);
 }
 
 * {
@@ -31,7 +31,6 @@ body {
 .App {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100%;
@@ -92,24 +91,6 @@ ul li::before {
   margin: 0;
 }
 
-.item input[type="checkbox"] {
-  opacity: 0;
-  position: absolute;
-  text-align: center;
-  width: 2.5rem;
-  width: 48px;
-  min-width: 48px;
-  height: 2.5rem;
-  height: 48px;
-  min-height: 48px;
-  cursor: pointer;
-  margin-right: 0.5rem;
-}
-
-.item input[type="checkbox"]:focus + label {
-  text-decoration: underline;
-}
-
 .item > label {
   font-size: 0.75rem;
   flex-grow: 1;
@@ -137,11 +118,6 @@ ul li::before {
   margin: 0.5rem 0 0;
   padding: 0 0.5rem 0.25rem;
   border-bottom: 1px solid var(--clr-fond);
-}
-
-.addForm label {
-  position: absolute;
-  left: -99999px;
 }
 
 .addForm input[type="text"] {
@@ -180,11 +156,6 @@ button:hover {
   margin: 0.25rem 0 0;
   padding: 0 0.5rem 0.25rem;
   border-bottom: 1px solid var(--clr-dark);
-}
-
-.searchForm label {
-  position: absolute;
-  left: -99999px;
 }
 
 .searchForm input[type="text"] {
